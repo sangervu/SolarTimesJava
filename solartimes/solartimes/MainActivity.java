@@ -24,22 +24,29 @@ public class MainActivity {
         double deltaSunDeg = elementsSun.deltaSunDeg;
         double alfaSunDeg = elementsSun.alfaSunDeg;
 
-        ElevationMax maxElevation = new ElevationMax(deltaSunDeg, latitudeDeg);
         StellarTime timeStellar = new StellarTime(T, longitudeDeg);
 
         double timeStellarLocalDeg = timeStellar.stellarTimeLocalDeg;
         double timeStellarNoon = timeStellar.stellarTimeNoonDeg;
-        LocalHorizontal horizontalLocal = new LocalHorizontal(alfaSunDeg, deltaSunDeg, timeStellarLocalDeg, latitudeDeg);
 
-        double currentSunElevationDeg = horizontalLocal.currentElevationDeg;
+        System.out.println("StellarTime: " + timeStellarLocalDeg);
+        System.out.println("StellarTime: " + timeStellarNoon);
 
-        double maxSunElevationDeg = maxElevation.maxElevationDeg;
+        // Sun position parameters
+        SunPosition positionSun = new SunPosition(alfaSunDeg, deltaSunDeg, timeStellarLocalDeg, latitudeDeg);
+
+        double currentSunElevationDeg = positionSun.currentElevationDeg;
+        double sunAzimuthDeg = positionSun.currentAzimuthDeg;
+        String sunAzimuthString = positionSun.currentAzimuthString;
+
+        double maxSunElevationDeg = positionSun.maxElevationDeg;
 
         SolarPower powerSolar = new SolarPower(latitudeDeg, T, currentSunElevationDeg, maxSunElevationDeg);
 
         South south = new South(alfaSunDeg, timeStellarNoon);
 
         double timeSouth = south.timeSouth;
+        System.out.println("Time south: " + timeSouth);
 
         SolarCalculations calcSolar = new SolarCalculations(deltaSunDeg, latitudeDeg, currentSunElevationDeg, maxSunElevationDeg, timeSouth);
 
@@ -55,13 +62,16 @@ public class MainActivity {
         //String sunUviEndString = solarActivity.uvIndexEndString;*/
 
         //System.out.println("Solar activity " + solarActivity.maxSunPowerDiurnal);
-        System.out.println("Sun " + sunPowerNow);
-        System.out.println("Sun " + sunPowerDayMax);
-        System.out.println("Sun " + sunPowerYearMax);
+        System.out.println("Sun current Power [W/m2]: " + sunPowerNow);
+        System.out.println("Sun Power max today [W/m2]: " + sunPowerDayMax);
+        System.out.println("Sun Power max during the year [W/m2]: " + sunPowerYearMax);
 
-        System.out.println("UVI " + sunUvi);
-        System.out.println("UVI Max " + sunUviMax);
-        System.out.println("aurinko " + maxSunElevationDeg);
+        System.out.println("UVI now: " + sunUvi);
+        System.out.println("UVI max today: " + sunUviMax);
+        System.out.println("Sun max elevation today: " + maxSunElevationDeg);
+        System.out.println("Sun current elevation: " + currentSunElevationDeg);
+        System.out.println("Sun current azimuth: " + sunAzimuthDeg);
+        System.out.println("Sun current azimuth: " + sunAzimuthString);
 
         //sunTimes();
     }
@@ -79,9 +89,6 @@ public class MainActivity {
         String sunCivilString = Set.timeSetCivilString;
         String sunNauticalString = Set.timeSetNauticalString;
         String sunAstroString = Set.timeSetAstronomicalString;
-
-        String sunAzimuth = LocalHorizontal.suunta;
-        double sunAltitude = LocalHorizontal.elevation;
          */
     }
 

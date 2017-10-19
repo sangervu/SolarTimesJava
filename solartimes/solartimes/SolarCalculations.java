@@ -12,7 +12,7 @@ public class SolarCalculations {
     public double UvIndexEnd;
     public String UvIndexEndString;
 
-    public SolarCalculations(double deltaSunDeg, double latitudeDeg, double currentSunElevationDeg, double maxSunAltitudeDiurnalRad, double timeSouth) {
+    public SolarCalculations(double deltaSunDeg, double latitudeDeg, double currentSunElevationDeg, double maxSunAltitudeDiurnalDeg, double timeSouth) {
 
         double weakThermalLimitRad = Math.toRadians(17.5); //degrees in Sun elevation, empirical
         double strongThermalLimitRad = Math.toRadians(35.0); //degrees in Sun elevation, empirical
@@ -51,7 +51,13 @@ public class SolarCalculations {
         if (Double.isNaN(uvIndex)) {
             this.UvIndex = 0.;
         }
+        else {
+        
+        this.UvIndex = uvIndex;
+        }
 
+        double maxSunAltitudeDiurnalRad = Math.toRadians(maxSunAltitudeDiurnalDeg);
+        
         double mMax = 1. / Math.cos(Math.asin(6371. / 6393. * Math.sin((Math.PI / 2 - maxSunAltitudeDiurnalRad))));
 
         this.UvIndexMax = MathNew.pow(Math.cos(Math.PI / 2 - maxSunAltitudeDiurnalRad), a) * MathNew.exp(b + c * mMax + d * mMax * mMax) / 25.;

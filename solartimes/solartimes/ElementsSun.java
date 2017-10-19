@@ -4,7 +4,7 @@ public class ElementsSun {
 
     public double alfaSunDeg;
     public double deltaSunDeg;
-    //public double epsilonRad;
+    // public double epsilonRad;
 
     // Objecti rektaskensio, right ascension ja deklinaatio
     public ElementsSun(double T) {
