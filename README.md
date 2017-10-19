@@ -1,0 +1,2 @@
+# SolarTimesJava
+Celestial calculator
