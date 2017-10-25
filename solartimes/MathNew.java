@@ -2,44 +2,6 @@ package solartimes;
 
 public class MathNew {
 
-    /*public static double arcTan(double x) {
-        double a = 1. / Math.sqrt(1 + x * x);
-        double b = 1.0;
-        a = 0.5 * (a + b);
-        b = Math.sqrt(a * b);
-        while (b - a > 1e-13) {
-            a = 0.5 * (a + b);
-            b = Math.sqrt(a * b);
-        }
-        x = x / (Math.sqrt(1 + x * x) * b);
-        return x;
-    }*/
-
-    /*public static double arcSin(double x) {
-        if (x == 1) {
-            x = Math.PI / 2;
-        } else if (x == -1) {
-            x = -Math.PI / 2;
-        } else {
-            x = x / (Math.sqrt(1 - x * x));
-            x = arcTan(x);
-        }
-        return x;
-    } */
-
-   /* public static double arcCos(double x) {
-        if (x == -1) {
-            x = Math.PI;
-            return x;
-        }
-        x = Math.sqrt(1 - x * x) / x;
-        x = arcTan(x);
-        if (x < 0) {
-            x = x + Math.PI;
-        }
-        return x;
-    }*/
-
     static public double pow(double x, double y) {
         if (x == 0.) {
             return 0.;
@@ -203,4 +165,42 @@ public class MathNew {
         x = x / 10;
         return x;
     }
+
+    /*public static double arcTan(double x) {
+        double a = 1. / Math.sqrt(1 + x * x);
+        double b = 1.0;
+        a = 0.5 * (a + b);
+        b = Math.sqrt(a * b);
+        while (b - a > 1e-13) {
+            a = 0.5 * (a + b);
+            b = Math.sqrt(a * b);
+        }
+        x = x / (Math.sqrt(1 + x * x) * b);
+        return x;
+    }*/
+
+ /*public static double arcSin(double x) {
+        if (x == 1) {
+            x = Math.PI / 2;
+        } else if (x == -1) {
+            x = -Math.PI / 2;
+        } else {
+            x = x / (Math.sqrt(1 - x * x));
+            x = arcTan(x);
+        }
+        return x;
+    } */
+
+ /* public static double arcCos(double x) {
+        if (x == -1) {
+            x = Math.PI;
+            return x;
+        }
+        x = Math.sqrt(1 - x * x) / x;
+        x = arcTan(x);
+        if (x < 0) {
+            x = x + Math.PI;
+        }
+        return x;
+    }*/
 }

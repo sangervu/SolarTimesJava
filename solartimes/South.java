@@ -2,16 +2,17 @@ package solartimes;
 
 public class South {
 
-    public static String timeSouthString;
-    public static double timeSouth;
+    public String timeSouthString;
+    public double timeSouth;
 
-    public South(double alfa) {
+    public South(double alfaDeg, double timeStellarNoonDeg) {
 
-        double timeStellarNoon = StellarTimeDeg.stellarTimeNoon;
         /*korkeimmillaan, eli etelässä*/
-        timeSouth = TrueDegree.minDegree(alfa - timeStellarNoon) * 24. / 360.;
-        //TimeFormat timeSun = new TimeFormat(timeSouth);
+        
+        double timeSouth = TrueDegree.minDegree(alfaDeg - timeStellarNoonDeg) * 24. / 360.;
 
-        timeSouthString = (TimeFormat.hourTimeString) + ":" + (TimeFormat.minuteTimeString);
+        this.timeSouth = timeSouth;
+        
+        this.timeSouthString = (TimeFormat.timeHour(timeSouth) + ":" + TimeFormat.timeMinute(timeSouth));
     }
 }

@@ -34,7 +34,7 @@ public static double trueElevation(double degree) {
              double alfa=y/x;
                alfa=Math.toDegrees(Math.atan(alfa));
                if (y >= 0 & x > 0)
-                 alfa=y/x;
+                 alfa=alfa;
                else if (y >= 0 & x < 0)
                  alfa=alfa+ 180;
                else if (y < 0 & x > 0)
