@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 public class MainActivity {
 
-    public static double latitudeDeg = Location.latitude;
-    public static double longitudeDeg = Location.longitude;
-
     public static double upYesterday;
     public static double upToday;
 
     public static void main(String[] args) {
+
+        double latitudeDeg = Location.latitude;
+        double longitudeDeg = Location.longitude;
 
         MyDate myDate = new MyDate();
         int year = myDate.year;
@@ -20,17 +20,14 @@ public class MainActivity {
 
         double jul = julian.julian;
         double T = julian.noonT; // T at noon
-       
-        System.out.println("year: " + year);
-        System.out.println("month: " + month);
-        System.out.println("day: " + day);
-        System.out.println("julian: " + jul);
-        System.out.println("T: " + T);
 
         int jatka = 1;
 
         while (jatka == 1) {
-            System.out.println("Jatka, paina 1 ");
+            
+            System.out.println("latitude [deg]: " + latitudeDeg);
+            System.out.println("longitude [deg]: " + longitudeDeg);
+            System.out.println("1:Jatka 2:Anna uusi sijainti");
             Scanner annaLuku = new Scanner(System.in);
             jatka = annaLuku.nextInt();
 
@@ -42,16 +39,16 @@ public class MainActivity {
 
                     case 1:
                         T = julian.noonT; // T at noon
-                        sunNow(T);
+                        sunNow(T, latitudeDeg, longitudeDeg);
                         break;
                     case 2:
                         T = julian.noonT; // T at noon
-                        sunToday(T);
+                        sunToday(T, latitudeDeg, longitudeDeg);
                         break;
                     case 3:
                         Julian julianYesterday = new Julian(year, month, day - 1);
                         T = julianYesterday.noonT; // T at noon
-                        sunYesterday(T);
+                        sunYesterday(T, latitudeDeg, longitudeDeg);
                         break;
                     case 4:
                         double timeDif = upYesterday - upToday;
@@ -64,14 +61,25 @@ public class MainActivity {
                         break;
                     case 5:
                         T = julian.noonT; // T at noon
-                        solarParameters(jul, T);
+                        solarParameters(jul, T, latitudeDeg, longitudeDeg);
                         break;
                 }
+            }
+            if (jatka == 2) {
+                System.out.println("latitude (decimal):");
+                Scanner inputLat = new Scanner(System.in);
+                latitudeDeg = inputLat.nextInt();
+
+                System.out.println("longitude (decimal):");
+                Scanner inputLon = new Scanner(System.in);
+                longitudeDeg = inputLon.nextInt();
+
+                jatka = 1;
             }
         }
     }
 
-    public static void sunNow(double T) {
+    public static void sunNow(double T, double latitudeDeg, double longitudeDeg) {
 
         // calculate sun elements
         ElementsSun elementsSun = new ElementsSun(T);
@@ -104,7 +112,7 @@ public class MainActivity {
         System.out.println("UVI now: " + sunUvi);
     }
 
-    public static void sunToday(double T) {
+    public static void sunToday(double T, double latitudeDeg, double longitudeDeg) {
 
         // calculate sun elements
         ElementsSun elementsSun = new ElementsSun(T);
@@ -140,7 +148,7 @@ public class MainActivity {
         System.out.println("Sun max elevation today: " + maxSunElevationDeg);
     }
 
-    public static void sunYesterday(double T) {
+    public static void sunYesterday(double T, double latitudeDeg, double longitudeDeg) {
         // calculate sun elements
         ElementsSun elementsSun = new ElementsSun(T);
         double deltaSunDeg = elementsSun.deltaSunDeg;
@@ -175,7 +183,7 @@ public class MainActivity {
         System.out.println("Sun max elevation today: " + maxSunElevationDeg);
     }
 
-    public static void solarParameters(double jul, double T) {
+    public static void solarParameters(double jul, double T, double latitudeDeg, double longitudeDeg) {
 
         // calculate sun elements
         ElementsSun elementsSun = new ElementsSun(T);
@@ -201,12 +209,12 @@ public class MainActivity {
         System.out.println("delta: " + deltaSunDeg);
         System.out.println("alfa: " + alfaSunDeg);
         System.out.println("StellarTimeNoon: " + timeStellarNoon);
-        
+
         System.out.println("Ax: " + positionSun.Ax);
         System.out.println("Ay: " + positionSun.Ay);
         //System.out.println("Time set: " + set.timeSetHorizonString);
         //System.out.println("Time up: " + up.timeUpString);
-
+        System.out.println("CurrentSunElevation: " + currentSunElevationDeg);
     }
 
 }

@@ -7,6 +7,7 @@ public class SolarCalculations {
     public double thermalActivityEnd;
     public String thermalActivityEndString;
     public double UvIndex;
+    public double m; 
     public double UvIndexMax;
     public double UvIndexOverThree;
     public double UvIndexEnd;
@@ -45,6 +46,7 @@ public class SolarCalculations {
 
         double a = 2.696056, b = 5.474571, c = -0.09888, d = 0.040392;
         double m = 1. / Math.cos(Math.asin(6371. / 6393. * Math.sin((Math.PI / 2 - currentSunElevationRad))));
+        this.m = m;
 
         double uvIndex = MathNew.roundDesimal_1(MathNew.pow(Math.cos(Math.PI / 2 - currentSunElevationRad), a) * MathNew.exp(b + c * m + d * m * m) / 25.);
 
